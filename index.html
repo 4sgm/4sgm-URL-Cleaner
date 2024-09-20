@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>4sgm URL Cleaner</title>
+    <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+    <div class="container mt-5">
+        <h1 class="text-center">URL Cleaner</h1>
+        <form id="urlForm" class="mt-4">
+            <div class="form-group">
+                <label for="urlInput">Enter a URL to Clean:</label>
+                <input type="text" id="urlInput" class="form-control" placeholder="Enter URL here">
+            </div>
+            <button type="button" class="btn btn-primary btn-block" onclick="sendRequest()">Clean URL</button>
+        </form>
+
+        <div id="responseContainer" class="mt-4" style="display:none;">
+            <h3>Cleaned URL:</h3>
+            <p id="cleanedUrl"></p>
+            <p id="description" class="text-muted">
+                In the cleaned URL, occurrences of the <code>csrfToken</code> parameter were removed, as well as other empty fields like <code>keywords</code>, <code>minPrice</code>, <code>maxPrice</code>, <code>field_62_min</code>, and <code>field_62_max</code>. These parameters do not affect the URL functionality and were removed for a cleaner result.
+            </p>
+        </div>
+    </div>
+
+    <script>
+        function sendRequest() {
+            const urlInput = document.getElementById('urlInput').value;
+
+            fetch('/clean_url', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ url: urlInput }),
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('cleanedUrl').innerText = data.cleaned_url;
+                document.getElementById('responseContainer').style.display = 'block';
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        }
+    </script>
+</body>
+</html>
