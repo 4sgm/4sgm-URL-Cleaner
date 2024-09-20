@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>4sgm URL Cleaner</title>
+    <title>🧹4sgm URL Cleaner</title>
     <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body class="bg-light">
     <div class="container mt-5">
-        <h1 class="text-center">URL Cleaner</h1>
+        <h1 class="text-center">🧹 <span style="font-family: Verdana; color: red; font-weight: bolder;">4sgm </span>URL Cleaner</h1>
         <form id="urlForm" class="mt-4">
             <div class="form-group">
                 <label for="urlInput">Enter a URL to Clean:</label>
@@ -20,8 +20,13 @@
 
         <div id="responseContainer" class="mt-4" style="display:none;">
             <h3>Cleaned URL:</h3>
-            <p id="cleanedUrl"></p>
-            <p id="description" class="text-muted">
+            <div class="input-group">
+                <input type="text" id="cleanedUrl" class="form-control" readonly>
+                <div class="input-group-append">
+                    <button class="btn btn-secondary" type="button" onclick="copyToClipboard()">Copy</button>
+                </div>
+            </div>
+            <p id="description" class="text-muted mt-2">
                 In the cleaned URL, occurrences of the <code>csrfToken</code> parameter were removed, as well as other empty fields like <code>keywords</code>, <code>minPrice</code>, <code>maxPrice</code>, <code>field_62_min</code>, and <code>field_62_max</code>. These parameters do not affect the URL functionality and were removed for a cleaner result.
             </p>
         </div>
@@ -40,12 +45,15 @@
             })
             .then(response => response.json())
             .then(data => {
-                document.getElementById('cleanedUrl').innerText = data.cleaned_url;
+                document.getElementById('cleanedUrl').value = data.cleaned_url;
                 document.getElementById('responseContainer').style.display = 'block';
-            })
-            .catch(error => {
-                console.error('Error:', error);
             });
+        }
+
+        function copyToClipboard() {
+            const cleanedUrl = document.getElementById('cleanedUrl');
+            cleanedUrl.select();
+            document.execCommand('copy');
         }
     </script>
 </body>
