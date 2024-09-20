@@ -22,7 +22,8 @@
   <a href="#usage">Usage</a> •
   <a href="#api-endpoint">API Endpoint</a> •
   <a href="#example">Example</a> •
-  <a href="#web-interface">Web Interface</a>
+  <a href="#web-interface">Web Interface</a> •
+  <a href="#visualization">Visualization</a>
 </p>
 
 ---
@@ -128,6 +129,18 @@ The application includes a web interface for easy URL cleaning:
 The web interface now includes a copy button after the cleaned URL field and provides a description explaining the removal of unnecessary parameters like `csrfToken`, `keywords`, and other empty fields that don't affect functionality.
 
 The web interface is rendered using the `index.html` file located in the root directory. Flask serves this file directly from the root URL `/`.
+
+## 📊 Visualization
+
+graph TD
+    A[User Inputs URL] -->|Submits via Web Form| B[Flask Server]
+    B --> C[Clean URL Function]
+    C -->|Removes csrfToken & unnecessary parameters| D[Returns Cleaned URL]
+    B --> E[API Endpoint /clean_url]
+    E --> F[Receives POST Request]
+    F -->|Removes csrfToken & unnecessary parameters| G[Responds with Cleaned URL]
+    D --> H[Web UI Displays Cleaned URL + Copy Button]
+    G --> H
 
 ---
 
