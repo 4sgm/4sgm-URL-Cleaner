@@ -132,6 +132,7 @@ The web interface is rendered using the `index.html` file located in the root di
 
 ## 📊 Visualization
 
+```mermaid
 graph TD
     A[User Inputs URL] -->|Submits via Web Form| B[Flask Server]
     B --> C[Clean URL Function]
@@ -141,6 +142,8 @@ graph TD
     F -->|Removes csrfToken & unnecessary parameters| G[Responds with Cleaned URL]
     D --> H[Web UI Displays Cleaned URL + Copy Button]
     G --> H
+
+```
 
 ---
 
