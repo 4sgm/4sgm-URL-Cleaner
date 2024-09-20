@@ -1,6 +1,6 @@
 # <h1 align="center">🧹 [4sgm URL Cleaner](https://github.com/ronknight/flask-url-cleaner) </h1> 
 
-#### <h4 align="center">A simple Flask web application and API that removes the 'csrfToken' parameter from URLs.</h4>
+#### <h4 align="center">A versatile Flask web application and API that cleans URLs by removing unnecessary parameters like 'csrfToken' and empty fields.</h4>
 
 <p align="center">
 <a href="https://twitter.com/PinoyITSolution"><img src="https://img.shields.io/twitter/follow/PinoyITSolution?style=social"></a>
